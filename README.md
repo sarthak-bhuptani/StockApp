@@ -1,16 +1,51 @@
-# React + Vite
+# 📈 StockApp - Professional Market Terminal
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, high-performance Stock Tracking Dashboard built with **React**, **Vite**, and **Tailwind CSS v4**. This application offers an institutional-grade trading experience with real-time data, AI-driven sentiment insights, and advanced global market searching.
 
-Currently, two official plugins are available:
+![Dashboard Preview](src/assets/hero.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Key Features
 
-## React Compiler
+*   **📊 Dynamic Market Dashboard**: Interactive charts powered by Recharts with live price tracking for major symbols.
+*   **🧠 AI-Powered Sentiment Engine**: Proprietary logic that analyzes global news sentiment to provide a "Market Mood" summary.
+*   **🔍 Advanced Global Search**: Search for any stock or company globally with a robust failsafe fallback system.
+*   **🔥 Sector Intelligence**: Visual heatmap of S&P 500 sectors to track rotation and market volatility.
+*   **⭐ Personal Watchlist**: Track your favorite tickers with real-time price updates and full company name display.
+*   **🌓 Adaptive Dark Mode**: Premium Midnight Dark mode with seamless light-mode switching using HSL Tailored color tokens.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Tech Stack
 
-## Expanding the ESLint configuration
+*   **Frontend**: React 19 (Hooks/Functional Architecture)
+*   **Build Tool**: Vite 8 (Ultra-fast HMR and bundling)
+*   **Styling**: Tailwind CSS v4 (Modern CSS-first approach with @utility support)
+*   **Data API**: Alpha Vantage (Global Quote, Symbol Search, News Sentiment)
+*   **Icons**: Lucide React
+*   **Charts**: Recharts
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 📥 Installation & Setup
+
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/sarthak-bhuptani/StockApp.git
+   cd StockApp
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+3. **Set your API Key**:
+   Open `src/Service/stockApi.js` and update the `API_KEY` constant with your free [Alpha Vantage API Key](https://www.alphavantage.co/support/#api-key).
+
+4. **Run the development server**:
+   ```bash
+   npm run dev
+   ```
+
+## 📜 License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+---
+Built with ❤️ by [Sarthak Bhuptani](https://github.com/sarthak-bhuptani)
