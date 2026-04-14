@@ -4,7 +4,7 @@ import StockChart from "../components/StockChart";
 import StockStat from "../components/StockStat";
 import Watchlist from "../components/Watchlist";
 import StockNews from "../components/StockNews";
-import { fetchStockData, fetchStockQuote, searchStocks } from "../Service/stockApi";
+import { fetchStockData, fetchStockQuote, searchStocks, fetchMarketPerformance } from "../Service/stockApi";
 
 export default function StockDashboard({ watchlist, toggleWatchlist, activeSymbol, setActiveSymbol }) {
     const [input, setInput] = useState("");
@@ -13,6 +13,7 @@ export default function StockDashboard({ watchlist, toggleWatchlist, activeSymbo
     const [suggestions, setSuggestions] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
+    const [marketData, setMarketData] = useState([]);
 
     const isFavorited = watchlist?.includes(activeSymbol);
 
@@ -41,6 +42,14 @@ export default function StockDashboard({ watchlist, toggleWatchlist, activeSymbo
     useEffect(() => {
         loadStock(activeSymbol);
     }, [loadStock, activeSymbol]);
+
+    useEffect(() => {
+        const loadMarket = async () => {
+            const data = await fetchMarketPerformance();
+            setMarketData(data.slice(0, 5)); // Show top 5 sectors
+        };
+        loadMarket();
+    }, []);
 
     useEffect(() => {
         if (input.length < 2) {
@@ -198,6 +207,33 @@ export default function StockDashboard({ watchlist, toggleWatchlist, activeSymbo
                 <div className="lg:col-span-3 space-y-10 lg:sticky lg:top-10">
                     <Watchlist onSelect={loadStock} watchlist={watchlist} />
                     
+                    {/* Market Pulse Sidebar Widget */}
+                    <div className="glass-card !p-6">
+                        <h3 className="font-black text-sm uppercase tracking-[0.2em] mb-6 text-text-secondary flex items-center gap-3">
+                            <TrendingUp size={16} className="text-brand-primary" />
+                            Market Pulse
+                        </h3>
+                        <div className="space-y-4">
+                            {marketData.map((sector) => (
+                                <div key={sector.name} className="flex items-center justify-between group">
+                                    <div className="flex flex-col">
+                                        <span className="text-xs font-bold text-text-primary group-hover:text-brand-primary transition-colors">{sector.name}</span>
+                                        <span className="text-[10px] text-text-secondary font-black uppercase tracking-tighter">{sector.cap}</span>
+                                    </div>
+                                    <span className={`text-sm font-black ${sector.change >= 0 ? "text-success" : "text-danger"}`}>
+                                        {sector.change >= 0 ? "+" : ""}{sector.change}%
+                                    </span>
+                                </div>
+                            ))}
+                            <button 
+                                onClick={() => setActiveSection("Market")} // Should pass these as props if needed, but App.jsx handles navigation
+                                className="w-full mt-4 py-2 text-[10px] font-black uppercase tracking-widest text-text-secondary hover:text-brand-primary border-t border-white/5 pt-4 transition-colors"
+                            >
+                                View Global Heatmap
+                            </button>
+                        </div>
+                    </div>
+
                     <div className="glass-card !p-6">
                          <h3 className="font-black text-sm uppercase tracking-[0.2em] mb-6 text-text-secondary flex items-center gap-3">
                             <Clock size={16} className="text-brand-primary" />

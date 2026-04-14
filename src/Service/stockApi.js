@@ -9,7 +9,7 @@ const USE_MOCK_DATA = false;
 
 export const fetchStockData = async (symbol) => {
     if (USE_MOCK_DATA) return getMockHistory(symbol);
-    
+
     try {
         const res = await axios.get(
             `${BASE_URL}?function=TIME_SERIES_DAILY&symbol=${symbol}&apikey=${API_KEY}`
@@ -120,7 +120,7 @@ export const fetchStockNews = async (symbol) => {
         const res = await axios.get(
             `${BASE_URL}?function=NEWS_SENTIMENT&tickers=${symbol}&apikey=${API_KEY}`
         );
-        
+
         const feed = res.data.feed || [];
         return feed.slice(0, 5).map(item => ({
             title: item.title,
@@ -166,7 +166,7 @@ export const getCompanyName = (symbol) => {
         "META": "Meta Platforms, Inc.",
         "NFLX": "Netflix, Inc."
     };
-    return names[symbol] || symbol; 
+    return names[symbol] || symbol;
 };
 
 function getMockHistory(symbol) {
@@ -190,7 +190,7 @@ function getMockQuote(symbol) {
     const basePrice = (seed % 300) + 50; // Prices between 50 and 350
     const change = (seed % 100) / 20 - 2.5; // Change between -2.5 and +2.5
     const changePercent = (change / basePrice * 100).toFixed(2);
-    
+
     return {
         symbol: symbol || "AAPL",
         name: getCompanyName(symbol || "AAPL"),
