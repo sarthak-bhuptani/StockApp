@@ -1,0 +1,120 @@
+@import "tailwindcss";
+
+/* 1. Base Variables & Tokens */
+:root {
+  --brand-primary: hsl(230, 85%, 60%);
+  --brand-secondary: hsl(260, 80%, 70%);
+  --success: hsl(150, 80%, 45%);
+  --danger: hsl(0, 80%, 60%);
+  
+  /* Midnight Dark Mode (Default) */
+  --surface-base: hsl(220, 25%, 10%);
+  --surface-elevated: hsl(220, 25%, 15%);
+  --surface-glass: hsla(220, 25%, 15%, 0.7);
+  --text-primary: hsl(0, 0%, 100%);
+  --text-secondary: hsl(215, 20%, 65%);
+  --border-color: hsla(0, 0%, 100%, 0.1);
+  --sidebar-active-bg: hsla(230, 85%, 60%, 0.12);
+  
+  color-scheme: dark;
+}
+
+/* 2. Light Mode Overrides */
+/* Note: We target both .light and [data-theme='light'] for maximum compatibility */
+.light, [data-theme='light'] {
+  --surface-base: hsl(210, 40%, 98%);
+  --surface-elevated: hsl(0, 0%, 100%);
+  --surface-glass: hsla(0, 0%, 100%, 0.85);
+  --text-primary: hsl(220, 40%, 10%);
+  --text-secondary: hsl(215, 15%, 35%);
+  --border-color: hsla(220, 40%, 10%, 0.1);
+  --sidebar-active-bg: hsla(230, 85%, 60%, 0.08);
+  
+  color-scheme: light;
+}
+
+/* 3. Tailwind 4 Theme Configuration */
+@theme {
+  --color-brand-primary: var(--brand-primary);
+  --color-brand-secondary: var(--brand-secondary);
+  --color-success: var(--success);
+  --color-danger: var(--danger);
+  
+  --color-surface-base: var(--surface-base);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-surface-glass: var(--surface-glass);
+  
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-border-color: var(--border-color);
+  --color-sidebar-active-bg: var(--sidebar-active-bg);
+}
+
+@utility glass {
+  @apply backdrop-blur-md;
+  background-color: var(--surface-glass);
+  border: 1px solid var(--border-color);
+}
+
+/* 4. Base Layers */
+@layer base {
+  * {
+    @apply transition-colors duration-300;
+    border-color: var(--border-color);
+  }
+  
+  html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+  }
+
+  body {
+    /* We use direct variables here for critical background elements to bypass JIT delays */
+    background-color: var(--surface-base);
+    color: var(--text-primary);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    
+    background-image: 
+      radial-gradient(at 0% 0%, hsla(230, 85%, 60%, 0.04) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, hsla(260, 80%, 70%, 0.04) 0px, transparent 50%);
+  }
+}
+
+/* 5. Component Utilities */
+@layer components {
+  .glass-card {
+    @apply glass rounded-2xl p-6 shadow-xl transition-all duration-300;
+  }
+  
+  .glass-card:hover {
+    border-color: hsla(230, 85%, 60%, 0.3);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+  
+  .btn-primary {
+    @apply bg-brand-primary text-white font-semibold py-2 px-6 rounded-xl transition-all active:scale-95;
+    box-shadow: 0 4px 14px 0 hsla(230, 85%, 60%, 0.39);
+  }
+  
+  .btn-primary:hover {
+    @apply bg-brand-primary;
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.23);
+  }
+
+  /* Custom scrollbar for pro feel */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 10px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: var(--text-secondary);
+  }
+}
