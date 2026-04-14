@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const API_KEY = "E1JT1KAT5BAW1WRG";
+// Retrieve the API Key from environment variables for security
+const API_KEY = import.meta.env.VITE_STOCK_API_KEY || "E1JT1KAT5BAW1WRG";
 const BASE_URL = "https://www.alphavantage.co/query";
 
 // Set this to true to use mock data and avoid API limits
