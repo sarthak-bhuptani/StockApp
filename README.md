@@ -2,8 +2,6 @@
 
 A modern, high-performance Stock Tracking Dashboard built with **React**, **Vite**, and **Tailwind CSS v4**. This application offers an institutional-grade trading experience with real-time data, AI-driven sentiment insights, and advanced global market searching.
 
-![Dashboard Preview](src/assets/hero.png)
-
 ## 🚀 Key Features
 
 *   **📊 Dynamic Market Dashboard**: Interactive charts powered by Recharts with live price tracking for major symbols.
